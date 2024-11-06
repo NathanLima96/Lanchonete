@@ -18,12 +18,26 @@ export interface Produto {
   preco: number;
   categoria: 'Lanches' | 'Bebidas' | 'Sobremesas' | 'Acompanhamentos';
   imagem: string;
+  permiteExtras?: boolean;
+}
+
+export interface Extra {
+  id: string;
+  nome: string;
+  preco: number;
+  disponivel: boolean;
+}
+
+export interface ItemExtra {
+  extraId: string;
+  quantidade: number;
 }
 
 export interface ItemPedido {
   id: string;
   produtoId: string;
   quantidade: number;
+  extras?: ItemExtra[];
   observacoes?: string;
 }
 

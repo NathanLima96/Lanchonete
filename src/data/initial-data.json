@@ -6,7 +6,8 @@
       "descricao": "Hambúrguer artesanal (180g), queijo, bacon, ovo, alface, tomate, cebola caramelizada e molho especial",
       "preco": 32.90,
       "categoria": "Lanches",
-      "imagem": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500"
+      "imagem": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=500",
+      "permiteExtras": true
     },
     {
       "id": "2",
@@ -14,7 +15,22 @@
       "descricao": "Coca-Cola, lata 350ml",
       "preco": 6.90,
       "categoria": "Bebidas",
-      "imagem": "https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=500"
+      "imagem": "https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=500",
+      "permiteExtras": false
+    }
+  ],
+  "extras": [
+    {
+      "id": "1",
+      "nome": "Bacon",
+      "preco": 5.00,
+      "disponivel": true
+    },
+    {
+      "id": "2",
+      "nome": "Ovo",
+      "preco": 4.00,
+      "disponivel": true
     }
   ]
 }

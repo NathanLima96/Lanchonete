@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, ShoppingBag, Users, Pizza, Menu } from 'lucide-react';
+import { LayoutDashboard, ShoppingBag, Users, Pizza, Menu, Coffee } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
   { name: 'Pedidos', href: '/pedidos', icon: ShoppingBag },
   { name: 'Clientes', href: '/clientes', icon: Users },
   { name: 'Produtos', href: '/produtos', icon: Pizza },
+  { name: 'Adicionais', href: '/extras', icon: Coffee },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {

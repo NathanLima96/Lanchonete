@@ -6,6 +6,7 @@ import { Pedidos } from './pages/Pedidos';
 import { NovoPedido } from './pages/NovoPedido';
 import { Clientes } from './pages/Clientes';
 import { Produtos } from './pages/Produtos';
+import { Extras } from './pages/Extras';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/pedidos/novo" element={<NovoPedido />} />
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/produtos" element={<Produtos />} />
+          <Route path="/extras" element={<Extras />} />
         </Routes>
       </Layout>
     </BrowserRouter>
