@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, ShoppingBag, Users, Pizza, Menu, Coffee } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useStore } from '../store/useStore';
+import { LayoutDashboard, ShoppingBag, Users, Pizza, Menu, Coffee, LogOut, Share2 } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -12,7 +13,33 @@ const navigation = [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const logout = useStore((state) => state.logout);
+  const lanchonete = useStore((state) => state.lanchonete);
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
+  const publicUrl = lanchonete 
+    ? `/cardapio/${lanchonete.nome.toLowerCase().replace(/\s+/g, '-')}` 
+    : '';
+
+  const handleShare = () => {
+    const url = window.location.origin + publicUrl;
+    if (navigator.share) {
+      navigator.share({
+        title: lanchonete?.nome,
+        text: 'Faça seu pedido online!',
+        url,
+      });
+    } else {
+      navigator.clipboard.writeText(url);
+      alert('Link copiado para a área de transferência!');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -32,8 +59,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
           bg-white border-r border-gray-200
         `}>
           <div className="flex flex-col h-full">
-            <div className="p-4">
-              <h1 className="text-2xl font-bold text-gray-900">Lanchonete</h1>
+            <div className="p-4 border-b border-gray-200">
+              <h1 className="text-xl font-bold text-gray-900">{lanchonete?.nome}</h1>
+              {lanchonete?.telefone && (
+                <p className="text-sm text-gray-500 mt-1">{lanchonete.telefone}</p>
+              )}
+              <button
+                onClick={handleShare}
+                className="mt-2 flex items-center text-sm text-blue-600 hover:text-blue-700"
+              >
+                <Share2 className="h-4 w-4 mr-1" />
+                Compartilhar Cardápio
+              </button>
             </div>
             <nav className="flex-1 p-4 space-y-1">
               {navigation.map((item) => {
@@ -57,6 +94,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 );
               })}
             </nav>
+            <div className="p-4 border-t border-gray-200">
+              <button
+                onClick={handleLogout}
+                className="flex items-center w-full px-4 py-3 text-sm font-medium text-red-600 rounded-md hover:bg-red-50"
+              >
+                <LogOut className="mr-3 h-5 w-5" />
+                Sair
+              </button>
+            </div>
           </div>
         </aside>
 

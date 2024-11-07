@@ -44,19 +44,19 @@ export function ExtrasSelector({ selectedExtras, onChange }: ExtrasSelectorProps
   if (extras.length === 0) return null;
 
   return (
-    <div className="space-y-3">
-      <h4 className="text-sm font-medium text-gray-700">Adicionais</h4>
-      <div className="grid grid-cols-2 gap-3">
+    <div className="space-y-4">
+      <h4 className="text-sm font-medium text-gray-900">Adicione extras ao seu pedido</h4>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {extras.map((extra) => {
           const selectedExtra = selectedExtras.find((e) => e.extraId === extra.id);
           return (
             <div
               key={extra.id}
-              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
             >
               <div>
                 <p className="text-sm font-medium text-gray-900">{extra.nome}</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm font-semibold text-blue-600">
                   {extra.preco.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
@@ -67,10 +67,10 @@ export function ExtrasSelector({ selectedExtras, onChange }: ExtrasSelectorProps
                 <button
                   type="button"
                   onClick={() => handleRemoveExtra(extra.id)}
-                  className={`p-1 rounded-md transition-colors ${
+                  className={`p-1.5 rounded-md transition-colors ${
                     selectedExtra
                       ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                      : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   }`}
                   disabled={!selectedExtra}
                 >
@@ -82,7 +82,7 @@ export function ExtrasSelector({ selectedExtras, onChange }: ExtrasSelectorProps
                 <button
                   type="button"
                   onClick={() => handleAddExtra(extra.id)}
-                  className="p-1 rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors"
+                  className="p-1.5 rounded-md bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors"
                 >
                   <Plus size={16} />
                 </button>

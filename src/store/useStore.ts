@@ -1,13 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Cliente, Pedido, Produto, Extra } from '../types';
+import { Cliente, Pedido, Produto, Extra, User, Lanchonete } from '../types';
 import initialData from '../data/initial-data.json';
 
 interface Store {
+  user: User | null;
+  lanchonete: Lanchonete | null;
   clientes: Cliente[];
   produtos: Produto[];
   pedidos: Pedido[];
   extras: Extra[];
+  login: (email: string, password: string) => boolean;
+  logout: () => void;
+  setLanchonete: (lanchonete: Lanchonete) => void;
   addCliente: (cliente: Cliente) => void;
   updateCliente: (cliente: Cliente) => void;
   removeCliente: (id: string) => void;
@@ -24,10 +29,21 @@ interface Store {
 export const useStore = create<Store>()(
   persist(
     (set) => ({
+      user: null,
+      lanchonete: null,
       clientes: [],
       produtos: initialData.produtos,
       pedidos: [],
       extras: initialData.extras,
+      login: (email: string, password: string) => {
+        if (email === 'admin@admin.com' && password === 'admin') {
+          set({ user: { email, password } });
+          return true;
+        }
+        return false;
+      },
+      logout: () => set({ user: null }),
+      setLanchonete: (lanchonete) => set({ lanchonete }),
       addCliente: (cliente) =>
         set((state) => ({
           clientes: [...state.clientes, cliente],

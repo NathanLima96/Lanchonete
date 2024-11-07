@@ -51,3 +51,15 @@ export interface Pedido {
   mesa?: number;
   createdAt: Date;
 }
+
+export interface User {
+  email: string;
+  password: string;
+}
+
+export interface Lanchonete {
+  nome: string;
+  logo?: string;
+  endereco?: string;
+  telefone?: string;
+}
